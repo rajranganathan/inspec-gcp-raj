@@ -1,0 +1,22 @@
+# gcloud compute instances create raj-test --zone=europe-west2-a --metadata-from-file  startup-script=startup.sh
+
+# gcloud compute instances add-metadata raj-test --zone=europe-west2-a --metadata-from-file  startup-script=startup.sh
+
+# gcloud compute instances reset raj-test --zone=europe-west2-a
+
+
+# logger "Hello Raj testing"
+
+
+
+#!/bin/bash
+
+# Install Stackdriver logging agent
+curl -sSO https://dl.google.com/cloudagents/add-logging-agent-repo.sh && \
+sudo bash add-logging-agent-repo.sh && \
+sudo apt-get update
+sudo apt-get install -y google-fluentd
+
+sudo apt-get install -y google-fluentd-catch-all-config
+
+sudo service google-fluentd restart
